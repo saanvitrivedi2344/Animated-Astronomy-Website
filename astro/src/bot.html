@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmic Explorer - Your Universe Guide</title>
+    <link rel="stylesheet" href="bot.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="stars" id="stars"></div>
+    <div class="planet" id="planet1"></div>
+    <div class="planet" id="planet2"></div>
+
+    <div class="container">
+      <header>
+        <h1>Cosmic Explorer</h1>
+        <p class="tagline">
+          Your AI-powered guide to the mysteries of the universe
+        </p>
+        <a href="dashboard.html" class="back-button">← Back to Dashboard</a>
+      </header>
+
+      <div class="chat-container">
+        <div class="chat-header">
+          <span><i class="fas fa-robot"></i> Universe Knowledge AI</span>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <div class="message bot-message">
+            <span class="bot-icon"><i class="fas fa-robot"></i></span>
+            <div class="message-content">
+              Greetings, cosmic explorer! I'm your AI astronomy assistant. 🌌<br /><br />
+              I can answer questions about stars, planets, galaxies, black
+              holes, space exploration, and any cosmic phenomenon. What would
+              you like to know about our magnificent universe?
+            </div>
+          </div>
+        </div>
+        <div class="typing-indicator" id="typing-indicator">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+        <div class="chat-input">
+          <input
+            type="text"
+            id="user-input"
+            placeholder="Ask anything about the universe..."
+            autocomplete="off"
+          />
+          <button id="send-btn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-brain"></i></div>
+          <h3 class="feature-title">Advanced AI</h3>
+          <p>
+            Powered by state-of-the-art language models from the Pollination AI
+            platform for accurate and insightful answers.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-database"></i></div>
+          <h3 class="feature-title">Extensive Knowledge</h3>
+          <p>
+            Access to comprehensive information about astronomy, physics, and
+            cosmic phenomena from across the known universe.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+          <h3 class="feature-title">Space Exploration</h3>
+          <p>
+            Learn about past, current, and future space missions, as well as the
+            latest discoveries from telescopes and rovers.
+          </p>
+        </div>
+      </div>
+
+      <footer>
+        Cosmic Explorer v2.0 | Powered by Pollination AI | © 2025 Stellar
+        Interactions
+      </footer>
+    </div>
+
+    <script>
+      // Create stars background
+      function createStars() {
+        const starsContainer = document.getElementById("stars");
+        const starCount = 200;
+
+        for (let i = 0; i < starCount; i++) {
+          const star = document.createElement("div");
+          star.className = "star";
+
+          // Random properties
+          const size = Math.random() * 2 + 1;
+          const x = Math.random() * 100;
+          const y = Math.random() * 100;
+          const duration = Math.random() * 5 + 3 + "s";
+          const delay = Math.random() * 5 + "s";
+
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+          star.style.left = `${x}%`;
+          star.style.top = `${y}%`;
+          star.style.setProperty("--duration", duration);
+          star.style.animationDelay = delay;
+
+          starsContainer.appendChild(star);
+        }
+      }
+
+      // Create floating planets
+      function createPlanets() {
+        const planet1 = document.getElementById("planet1");
+        const planet2 = document.getElementById("planet2");
+
+        // Random properties for planet1
+        const size1 = Math.random() * 100 + 100;
+        const x1 = Math.random() * 20;
+        const y1 = Math.random() * 30;
+
+        planet1.style.width = `${size1}px`;
+        planet1.style.height = `${size1}px`;
+        planet1.style.left = `${x1}%`;
+        planet1.style.top = `${y1}%`;
+        planet1.style.background = `radial-gradient(circle at 30% 30%, ${getRandomColor()}, ${getRandomColor()})`;
+        planet1.style.boxShadow = `0 0 50px ${getRandomColor(0.3)}`;
+        planet1.style.animation = `float 20s infinite ease-in-out`;
+
+        // Random properties for planet2
+        const size2 = Math.random() * 80 + 60;
+        const x2 = Math.random() * 20 + 70;
+        const y2 = Math.random() * 20 + 60;
+
+        planet2.style.width = `${size2}px`;
+        planet2.style.height = `${size2}px`;
+        planet2.style.right = `${x2}%`;
+        planet2.style.bottom = `${y2}%`;
+        planet2.style.background = `radial-gradient(circle at 70% 30%, ${getRandomColor()}, ${getRandomColor()})`;
+        planet2.style.boxShadow = `0 0 30px ${getRandomColor(0.3)}`;
+        planet2.style.animation = `float 25s infinite ease-in-out reverse`;
+
+        // Add keyframes dynamically
+        const style = document.createElement("style");
+        style.innerHTML = `
+          @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+
+      function getRandomColor(alpha = 1) {
+        const colors = [
+          `rgba(123, 31, 162, ${alpha})`, // Purple
+          `rgba(79, 195, 247, ${alpha})`, // Blue
+          `rgba(255, 235, 59, ${alpha})`, // Yellow
+          `rgba(233, 30, 99, ${alpha})`, // Pink
+          `rgba(76, 175, 80, ${alpha})`, // Green
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      // Chat functionality with Pollination API integration
+      document.addEventListener("DOMContentLoaded", function () {
+        createStars();
+        createPlanets();
+
+        const chatMessages = document.getElementById("chat-messages");
+        const userInput = document.getElementById("user-input");
+        const sendBtn = document.getElementById("send-btn");
+        const typingIndicator = document.getElementById("typing-indicator");
+
+        // Chat history for context
+        let chatHistory = [
+          {
+            role: "system",
+            content:
+              "You are an expert astronomy AI assistant called Cosmic Explorer. Answer questions about space, astronomy, astrophysics, cosmology, and the universe. Be scientifically accurate but explain concepts clearly for all levels. Include interesting facts when relevant. Be friendly and encouraging of scientific curiosity.",
+          },
+          {
+            role: "assistant",
+            content:
+              "Greetings, cosmic explorer! I'm your AI astronomy assistant. I can answer questions about stars, planets, galaxies, black holes, space exploration, and any cosmic phenomenon. What would you like to know about our magnificent universe?",
+          },
+        ];
+
+        // Send message function
+        async function sendMessage() {
+          const message = userInput.value.trim();
+          if (message === "") return;
+
+          // Add user message to chat
+          addMessage(message, "user");
+          userInput.value = "";
+
+          // Show typing indicator
+          typingIndicator.style.display = "flex";
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+
+          // Add to chat history
+          chatHistory.push({
+            role: "user",
+            content: message,
+          });
+
+          try {
+            // Call Pollination API
+            const response = await fetchAIResponse(message);
+
+            // Add to chat history
+            chatHistory.push({
+              role: "assistant",
+              content: response,
+            });
+
+            // Hide typing indicator and add bot message
+            typingIndicator.style.display = "none";
+            addMessage(response, "bot");
+
+            // Keep chat history at a reasonable size
+            if (chatHistory.length > 10) {
+              // Keep system message and last 9 exchanges
+              chatHistory = [chatHistory[0], ...chatHistory.slice(-9)];
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            typingIndicator.style.display = "none";
+            addMessage(
+              "I'm sorry, I experienced a technical issue. Please try again.",
+              "bot"
+            );
+          }
+
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Add message to chat
+        function addMessage(text, sender) {
+          const messageDiv = document.createElement("div");
+          messageDiv.className = `message ${sender}-message`;
+
+          if (sender === "bot") {
+            const iconSpan = document.createElement("span");
+            iconSpan.className = "bot-icon";
+            iconSpan.innerHTML = '<i class="fas fa-robot"></i>';
+            messageDiv.appendChild(iconSpan);
+          }
+
+          const contentDiv = document.createElement("div");
+          contentDiv.className = "message-content";
+          contentDiv.innerHTML = text;
+          messageDiv.appendChild(contentDiv);
+
+          chatMessages.appendChild(messageDiv);
+        }
+
+        // Fetch response from Pollination API
+        async function fetchAIResponse(message) {
+          try {
+            // First try to use the Pollination API
+            const prompt = encodeURIComponent(
+              `As an astronomy expert, answer this question about the universe in about 100 words:  ${message}`
+            );
+            const apiUrl = `https://text.pollinations.ai/${prompt}`;
+
+            console.log("Calling Pollination API...");
+            const response = await fetch(apiUrl);
+
+            if (response.ok) {
+              const textResponse = await response.text();
+              // If we got a valid response, use it
+              if (textResponse && textResponse.length > 20) {
+                return textResponse;
+              }
+            }
+
+            // If API call fails or returns empty content, fall back to our pre-defined responses
+            console.log("Falling back to predefined responses");
+            return getFallbackResponse(message);
+          } catch (error) {
+            console.error("Error calling Pollination API:", error);
+            // Fall back to predefined responses if API call fails
+            return getFallbackResponse(message);
+          }
+        }
+
+        // Fallback responses if API call fails
+        function getFallbackResponse(message) {
+          const query = message.toLowerCase();
+
+          // Check for greetings
+          if (
+            query.includes("hello") ||
+            query.includes("hi") ||
+            query.includes("hey") ||
+            query.includes("greetings") ||
+            query.includes("good morning") ||
+            query.includes("good afternoon") ||
+            query.includes("good evening") ||
+            query.match(/^(hi|hello|hey)(\s|$)/)
+          ) {
+            return "Greetings, cosmic explorer! It's wonderful to connect with a fellow universe enthusiast. 🌟<br><br>I'd be delighted to share knowledge about any astronomical topic that interests you. What aspect of the cosmos would you like to explore today? Perhaps stars, galaxies, black holes, exoplanets, or space missions?";
+          }
+
+          if (query.includes("black hole")) {
+            return "Black holes are fascinating cosmic objects! They form when massive stars collapse under their own gravity, creating a region where gravity is so strong that nothing—not even light—can escape once it passes the event horizon.<br><br>Some key facts about black holes:<br>• They come in different sizes: stellar (5-100 solar masses), intermediate (100-10,000 solar masses), and supermassive (millions to billions of solar masses)<br>• The first image of a black hole (M87*) was captured in 2019 by the Event Horizon Telescope<br>• Our Milky Way galaxy has a supermassive black hole at its center called Sagittarius A*<br>• They emit Hawking radiation, theoretically causing them to eventually evaporate over extremely long time periods<br><br>What specific aspect of black holes interests you most?";
+          } else if (query.includes("big bang")) {
+            return "The Big Bang theory is our best explanation for how the universe began and evolved. According to this theory, about 13.8 billion years ago, all matter, energy, space, and time were compressed into an incredibly hot, dense state, and then began expanding rapidly.<br><br>The theory is supported by several key observations:<br>• The universe is still expanding today (cosmic expansion)<br>• We can detect cosmic microwave background radiation (the afterglow of the Big Bang)<br>• The abundance of light elements like hydrogen and helium matches predictions<br>• The large-scale structure of galaxy distribution aligns with models<br><br>The Big Bang wasn't an explosion in space—it was an expansion of space itself, which continues today. The earliest moment we can currently theorize about is 10<sup>-43</sup> seconds after the beginning, known as the Planck epoch.";
+          } else if (
+            query.includes("planet") ||
+            query.includes("solar system")
+          ) {
+            return "Our solar system consists of the Sun, eight planets, dwarf planets, moons, asteroids, comets and other celestial objects.<br><br>The eight planets in order from the Sun are:<br>1. Mercury - The smallest and closest to the Sun<br>2. Venus - Similar in size to Earth, with a toxic atmosphere<br>3. Earth - Our home planet with liquid water and life<br>4. Mars - The Red Planet, currently being explored by rovers<br>5. Jupiter - The largest planet, a gas giant with a Great Red Spot<br>6. Saturn - Famous for its spectacular ring system<br>7. Uranus - An ice giant that rotates on its side<br>8. Neptune - The windiest planet with speeds up to 1,200 mph<br><br>Each planet has unique characteristics—would you like to know more about a specific one?";
+          } else if (
+            query.includes("life") &&
+            (query.includes("universe") ||
+              query.includes("alien") ||
+              query.includes("extraterrestrial"))
+          ) {
+            return "The question of extraterrestrial life is one of the most profound in science. While we haven't discovered definitive evidence of life beyond Earth yet, there are several promising possibilities within our solar system and beyond.<br><br>Potential habitats for life include:<br>• Mars - May have had liquid water and potentially microbial life in the past<br>• Europa (Jupiter's moon) - Has a subsurface ocean under its icy crust<br>• Enceladus (Saturn's moon) - Features water geysers and organic compounds<br>• Titan (Saturn's moon) - Has liquid methane lakes and complex chemistry<br><br>Beyond our solar system, we've discovered over 5,000 exoplanets, many in the habitable zone of their stars where liquid water could exist. The Drake Equation attempts to estimate the number of active, communicative extraterrestrial civilizations in our galaxy, considering factors like star formation, planet habitability, and technological development.<br><br>SETI (Search for Extraterrestrial Intelligence) uses radio telescopes to listen for potential signals from intelligent civilizations.";
+          } else if (query.includes("star") || query.includes("sun")) {
+            return "Stars are massive balls of plasma, primarily hydrogen and helium, that undergo nuclear fusion in their cores, releasing enormous amounts of energy as radiation and light.<br><br>Stars form from collapsing clouds of gas and dust and go through life cycles determined by their initial mass:<br><br>• Low-mass stars (like our Sun) live for billions of years before expanding into red giants and eventually becoming white dwarfs surrounded by planetary nebulae<br><br>• High-mass stars live much shorter lives (millions of years) but burn brighter, eventually exploding as supernovae and becoming either neutron stars or black holes<br><br>Our Sun is a G-type main-sequence star about 4.6 billion years old, halfway through its life cycle. It's 109 times Earth's diameter and accounts for 99.86% of the solar system's mass.<br><br>Stars are classified by their spectral characteristics (O, B, A, F, G, K, M from hottest to coolest) and luminosity class (from supergiants to dwarfs).";
+          } else {
+            // Default response for other queries
+            return "That's a fascinating question about the cosmos! The universe is incredibly vast and complex, with countless mysteries still being explored by astronomers and physicists.<br><br>Some mind-blowing facts about our universe:<br>• It's approximately 13.8 billion years old<br>• The observable universe is about 93 billion light-years in diameter<br>• There are more stars in the universe than grains of sand on all Earth's beaches<br>• We can only observe about 5% of the universe (the rest is dark matter and dark energy)<br>• Light from the most distant galaxies we can see began its journey nearly 13.3 billion years ago<br><br>Is there a specific aspect of astronomy or cosmology you'd like to explore further?";
+          }
+        }
+
+        // Event listeners
+        sendBtn.addEventListener("click", sendMessage);
+        userInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") sendMessage();
+        });
+      });
+    </script>
+  </body>
+</html>

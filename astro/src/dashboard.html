@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmic Portal | Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Top Navigation Bar -->
+      <header class="top-navbar">
+        <div class="mobile-header">
+          <div class="logo">
+            <a href="bot.html" class="logo-link" id="logo-link">
+              <div class="logo-icon"><i class="fas fa-rocket"></i></div>
+              <div class="logo-text">CosmicPortal</div>
+            </a>
+          </div>
+          <button class="mobile-menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+        <nav class="nav-menu">
+          <ul class="nav-links">
+            <li class="active">
+              <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-book-open"></i> Learn</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-calendar-alt"></i> Events</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <div class="search-bar">
+            <input type="text" placeholder="Search the universe..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+          <div class="user-section" id="user-section">
+            <!-- User section will be dynamically populated based on login status -->
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="welcome-section">
+          <h1>Welcome to Your Cosmic Journey</h1>
+
+          <!-- Solar System Visualization -->
+          <div class="solar-system-container">
+            <div class="sun"></div>
+            <!-- Mercury -->
+            <div class="orbit mercury-orbit">
+              <div class="planet mercury"></div>
+            </div>
+            <!-- Venus -->
+            <div class="orbit venus-orbit">
+              <div class="planet venus"></div>
+            </div>
+            <!-- Earth -->
+            <div class="orbit earth-orbit">
+              <div class="planet earth"></div>
+            </div>
+            <!-- Mars -->
+            <div class="orbit mars-orbit">
+              <div class="planet mars"></div>
+            </div>
+            <!-- Jupiter -->
+            <div class="orbit jupiter-orbit">
+              <div class="planet jupiter"></div>
+            </div>
+            <!-- Saturn with rings -->
+            <div class="orbit saturn-orbit">
+              <div class="planet saturn">
+                <div class="saturn-rings"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="dashboard-grid">
+          <div class="card astronomy-today">
+            <h2>Astronomy Today</h2>
+            <p class="date">May 10, 2023</p>
+            <div class="astronomy-content">
+              <img
+                src="https://via.placeholder.com/300x200"
+                alt="Astronomy image"
+              />
+              <p>
+                The Hubble Space Telescope has captured stunning new images of
+                the Carina Nebula, revealing previously unseen details of star
+                formation.
+              </p>
+            </div>
+            <div class="card-actions">
+              <a href="#" class="read-more">Read More</a>
+            </div>
+          </div>
+
+          <div class="card celestial-events">
+            <h2>Upcoming Celestial Events</h2>
+            <ul class="events-list">
+              <li>
+                <div class="event-date">May 15</div>
+                <div class="event-details">
+                  <div class="event-title">Lunar Eclipse</div>
+                  <div class="event-description">
+                    Visible from North America
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="event-date">May 22</div>
+                <div class="event-details">
+                  <div class="event-title">
+                    Mercury at Greatest Eastern Elongation
+                  </div>
+                  <div class="event-description">Best time to view Mercury</div>
+                </div>
+              </li>
+              <li>
+                <div class="event-date">June 10</div>
+                <div class="event-details">
+                  <div class="event-title">Annular Solar Eclipse</div>
+                  <div class="event-description">Visible in parts of Asia</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card space-missions">
+            <h2>Active Space Missions</h2>
+            <div class="missions-grid">
+              <div class="mission">
+                <div class="mission-icon">🚀</div>
+                <div class="mission-name">Perseverance Rover</div>
+                <div class="mission-status">Mars</div>
+              </div>
+              <div class="mission">
+                <div class="mission-icon">🛰️</div>
+                <div class="mission-name">James Webb Telescope</div>
+                <div class="mission-status">L2 Point</div>
+              </div>
+              <div class="mission">
+                <div class="mission-icon">🚀</div>
+                <div class="mission-name">SpaceX Crew-6</div>
+                <div class="mission-status">ISS</div>
+              </div>
+              <div class="mission">
+                <div class="mission-icon">🛰️</div>
+                <div class="mission-name">Voyager 1</div>
+                <div class="mission-status">Interstellar</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card night-sky-card">
+            <h2>Tonight's Sky</h2>
+            <div class="sky-visualization">
+              <div class="planet-marker" style="top: 20%; left: 30%">Mars</div>
+              <div class="planet-marker" style="top: 40%; left: 60%">Venus</div>
+              <div class="planet-marker" style="top: 70%; left: 80%">
+                Jupiter
+              </div>
+              <div class="constellation" style="top: 30%; left: 70%">Orion</div>
+            </div>
+            <div class="sky-info">
+              <div class="sky-detail">
+                <div class="sky-label">Moonrise</div>
+                <div class="sky-value">8:45 PM</div>
+              </div>
+              <div class="sky-detail">
+                <div class="sky-label">Moonset</div>
+                <div class="sky-value">6:12 AM</div>
+              </div>
+              <div class="sky-detail">
+                <div class="sky-label">Visibility</div>
+                <div class="sky-value">Good</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="cosmic-background"></div>
+    <div class="stars"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const userSection = document.getElementById("user-section");
+        const logoLink = document.getElementById("logo-link");
+
+        // Check if the user is logged in
+        const authToken = localStorage.getItem("authToken");
+
+        if (authToken) {
+          // User is logged in
+          const userData = JSON.parse(localStorage.getItem("user"));
+          console.log(userData);
+          const userName = userData ? userData.username : "Cosmic Explorer";
+
+          userSection.innerHTML = `
+            <div class="user-link" id="user-profile-link">
+              <div class="user-avatar">
+                <i class="fas fa-user-astronaut"></i>
+              </div>
+              <div class="user-info">
+                <div class="user-name">${userName}</div>
+                <div class="user-status">Online</div>
+              </div>
+            </div>
+            <div class="logout-btn">
+              <a href="javascript:void(0);" id="logout-link">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          `;
+
+          document
+            .getElementById("user-profile-link")
+            .addEventListener("click", function () {
+              window.location.href = "bot.html"; // Redirect to bot page
+            });
+
+          document
+            .getElementById("logout-link")
+            .addEventListener("click", function () {
+              // Log out the user
+              localStorage.removeItem("authToken");
+              localStorage.removeItem("user");
+              window.location.href = "login.html"; // Redirect to login page
+            });
+        } else {
+          // User is not logged in
+          userSection.innerHTML = `
+            <div class="auth-buttons">
+              <a href="login.html" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Login
+              </a>
+              <a href="register.html" class="register-btn">
+                <i class="fas fa-user-plus"></i> Register
+              </a>
+            </div>
+          `;
+
+          logoLink.addEventListener("click", function () {
+            alert("You need to log in first.");
+            window.location.href = "login.html"; // Redirect to login page
+          });
+        }
+      });
+    </script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>

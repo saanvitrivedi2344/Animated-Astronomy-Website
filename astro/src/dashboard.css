@@ -1,0 +1,1235 @@
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables */
+:root {
+  /* Add these missing variables */
+  --primary-bg: #0f0f1c;
+  --glass: rgba(15, 15, 28, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  --primary: #6c63ff;
+  --secondary: #4d44db;
+  --accent: #ff6584;
+  --dark: #1a1a2e;
+  --darker: #0f0f1c;
+  --light: #e6e6fa;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --star-glow: rgba(255, 255, 255, 0.8);
+  --card-bg: rgba(15, 15, 28, 0.8);
+  --sidebar-width: 260px;
+  --transition: all 0.3s ease;
+  --card-glow: 0 0 20px rgba(108, 99, 255, 0.2);
+  --card-hover-glow: 0 0 30px rgba(108, 99, 255, 0.4);
+  --navbar-height: 70px;
+}
+
+/* Base Styles */
+body {
+  font-family: "Space Grotesk", sans-serif;
+  background-color: var(--darker);
+  color: var(--light);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  background-image: radial-gradient(
+      circle at 20% 30%,
+      var(--star-glow) 1px,
+      transparent 1px
+    ),
+    radial-gradient(circle at 80% 70%, var(--star-glow) 1px, transparent 1px),
+    radial-gradient(circle at 40% 90%, var(--star-glow) 1px, transparent 1px),
+    radial-gradient(circle at 60% 10%, var(--star-glow) 1px, transparent 1px);
+  background-size: 200px 200px;
+}
+
+/* Background Animation */
+.cosmic-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -9; /* Just above stars but below content */
+  pointer-events: none;
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(77, 121, 255, 0.1) 0%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(138, 43, 226, 0.1) 0%,
+      transparent 20%
+    ),
+    var(--primary-bg);
+  animation: cosmicPulse 20s infinite alternate;
+}
+
+@keyframes cosmicPulse {
+  0% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.stars {
+  position: fixed;
+  z-index: -10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="20" cy="20" r="0.5" fill="white"/><circle cx="50" cy="50" r="0.7" fill="white"/><circle cx="80" cy="30" r="0.3" fill="white"/><circle cx="30" cy="70" r="0.4" fill="white"/><circle cx="70" cy="80" r="0.6" fill="white"/></svg>')
+      repeat,
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><circle cx="40" cy="40" r="1" fill="white" opacity="0.5"/><circle cx="160" cy="60" r="1.2" fill="white" opacity="0.7"/><circle cx="80" cy="120" r="0.8" fill="white" opacity="0.3"/></svg>')
+      repeat;
+  pointer-events: none;
+  animation: starsMovement 100s linear infinite;
+}
+
+@keyframes starsMovement {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: -1000px 500px, 500px -1000px;
+  }
+}
+
+/* Glass Morphism Effect */
+.glass-effect {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+  border-radius: 12px;
+}
+
+/* Dashboard container */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+  isolation: isolate; /* Creates a stacking context */
+  transform-style: preserve-3d; /* Maintain 3D context */
+  transform: translateZ(0); /* Force hardware acceleration */
+  will-change: transform; /* Optimize for animations */
+}
+
+/* Top navbar */
+.top-navbar {
+  background: rgba(10, 10, 20, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 0 2rem;
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-icon {
+  font-size: 1.8rem;
+  margin-right: 0.7rem;
+  color: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo-text {
+  font-family: "Space Mono", monospace;
+  font-size: 1.4rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+.nav-menu {
+  flex: 1;
+  margin: 0 2rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  padding: 0.8rem 1rem;
+  color: var(--light);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  border-radius: 8px;
+}
+
+.nav-links li a i {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+  min-width: 20px;
+  text-align: center;
+}
+
+.nav-links li.active a {
+  background: rgba(108, 99, 255, 0.15);
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(108, 99, 255, 0.2);
+}
+
+.nav-links li:hover a {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.search-bar {
+  display: flex;
+  position: relative;
+}
+
+.search-bar input {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 0.5rem 1rem;
+  width: 200px;
+  color: var(--light);
+  font-family: "Space Grotesk", sans-serif;
+  transition: var(--transition);
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+  width: 220px;
+}
+
+.search-bar button {
+  background: none;
+  border: none;
+  color: var(--light);
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.search-bar button:hover {
+  color: var(--primary);
+}
+
+.notifications {
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.6rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  position: relative;
+}
+
+.notifications:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-section:hover {
+  background: rgba(108, 99, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(108, 99, 255, 0.3);
+  border-color: rgba(108, 99, 255, 0.3);
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.6rem;
+  font-size: 1rem;
+  box-shadow: 0 0 12px rgba(108, 99, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  transition: var(--transition);
+}
+
+.user-section:hover .user-avatar {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(108, 99, 255, 0.6);
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  background: linear-gradient(to right, #ffffff, #e6e6fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: var(--transition);
+}
+
+.user-section:hover .user-name {
+  background: linear-gradient(to right, #ffffff, var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.user-status {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.user-status::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  margin-right: 5px;
+  box-shadow: 0 0 8px #4ade80;
+  animation: pulse 2s infinite;
+}
+
+.user-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+  margin-left: 20px;
+}
+
+.login-btn,
+.register-btn {
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: var(--transition);
+  border: 1px solid;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-btn i,
+.register-btn i {
+  margin-right: 6px;
+  font-size: 0.85rem;
+}
+
+.login-btn {
+  background: transparent;
+  color: var(--neon-blue);
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 10px rgba(79, 195, 247, 0.1);
+}
+
+.login-btn:hover {
+  background: rgba(79, 195, 247, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(79, 195, 247, 0.3);
+}
+
+.register-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(108, 99, 255, 0.2);
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(108, 99, 255, 0.4);
+}
+
+/* Main content */
+.content {
+  padding: 2rem;
+  flex: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Welcome section with solar system */
+.welcome-section {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.welcome-section h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  background: linear-gradient(to right, #ffffff, #e6e6fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+  margin-bottom: 2rem;
+}
+
+/* Solar System Visualization */
+.solar-system-container {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.sun {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at 30% 30%, #fff, #ffde00, #ff8c00);
+  border-radius: 50%;
+  box-shadow: 0 0 50px #ff8c00;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.orbit {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.mercury-orbit {
+  width: 120px;
+  height: 120px;
+}
+
+.venus-orbit {
+  width: 180px;
+  height: 180px;
+}
+
+.earth-orbit {
+  width: 240px;
+  height: 240px;
+}
+
+.mars-orbit {
+  width: 300px;
+  height: 300px;
+}
+
+.jupiter-orbit {
+  width: 380px;
+  height: 380px;
+}
+
+.saturn-orbit {
+  width: 460px;
+  height: 460px;
+}
+
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.mercury {
+  width: 8px;
+  height: 8px;
+  background: #a9a9a9;
+  box-shadow: 0 0 5px rgba(169, 169, 169, 0.6);
+}
+
+.venus {
+  width: 12px;
+  height: 12px;
+  background: #e6c229;
+  box-shadow: 0 0 5px rgba(230, 194, 41, 0.6);
+}
+
+.earth {
+  width: 14px;
+  height: 14px;
+  background: #6b93d6;
+  box-shadow: 0 0 5px rgba(107, 147, 214, 0.6);
+}
+
+.mars {
+  width: 10px;
+  height: 10px;
+  background: #c1440e;
+  box-shadow: 0 0 5px rgba(193, 68, 14, 0.6);
+}
+
+.jupiter {
+  width: 25px;
+  height: 25px;
+  background: #c88b3a;
+  box-shadow: 0 0 8px rgba(200, 139, 58, 0.6);
+}
+
+.saturn {
+  width: 22px;
+  height: 22px;
+  background: #e4d191;
+  position: relative;
+  box-shadow: 0 0 8px rgba(228, 209, 145, 0.6);
+}
+
+.saturn-rings {
+  position: absolute;
+  width: 40px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(20deg);
+}
+
+/* Dashboard grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.8rem;
+}
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.8rem;
+  box-shadow: var(--card-glow);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 3; /* Keep cards above backgrounds */
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  opacity: 0.7;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--card-hover-glow);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card h2 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+/* Astronomy Today Card */
+.astronomy-today .date {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.astronomy-today .date::before {
+  content: "📅";
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+.astronomy-content {
+  display: flex;
+  margin-bottom: 1.2rem;
+  gap: 1.2rem;
+}
+
+.astronomy-content img {
+  width: 140px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: var(--transition);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.astronomy-today:hover .astronomy-content img {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.astronomy-content p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.read-more {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  transition: var(--transition);
+  float: right;
+  font-weight: 500;
+}
+
+.read-more::after {
+  content: "→";
+  margin-left: 5px;
+  transition: var(--transition);
+}
+
+.read-more:hover {
+  color: var(--accent);
+}
+
+.read-more:hover::after {
+  transform: translateX(3px);
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.explore-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  color: white;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+  box-shadow: 0 4px 10px rgba(108, 99, 255, 0.3);
+}
+
+.explore-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(108, 99, 255, 0.5);
+}
+
+/* Events Card */
+.celestial-events h2::before {
+  content: "🌠";
+  margin-right: 10px;
+}
+
+.events-list {
+  list-style: none;
+  padding: 0;
+}
+
+.events-list li {
+  display: flex;
+  margin-bottom: 1.2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition);
+}
+
+.events-list li:hover {
+  background: rgba(255, 255, 255, 0.03);
+  transform: translateX(5px);
+  border-radius: 8px;
+  padding-left: 5px;
+}
+
+.events-list li:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.event-date {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 0.6rem;
+  border-radius: 10px;
+  min-width: 70px;
+  text-align: center;
+  font-weight: 500;
+  margin-right: 1rem;
+  box-shadow: 0 4px 10px rgba(108, 99, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.event-title {
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+}
+
+.event-description {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Missions Card */
+.space-missions h2::before {
+  content: "🚀";
+  margin-right: 10px;
+}
+
+.missions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+.mission {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.mission-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mission-name {
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+}
+
+.mission-status {
+  font-size: 0.85rem;
+  color: var(--accent);
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background: rgba(255, 101, 132, 0.1);
+  border-radius: 20px;
+  margin-top: 0.3rem;
+}
+
+/* Night Sky Card */
+.night-sky-card {
+  position: relative;
+  z-index: 3;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+.night-sky-card h2::before {
+  content: "✨";
+  margin-right: 10px;
+}
+
+.sky-visualization {
+  height: 220px;
+  background: linear-gradient(to bottom, #0f0f1c, #162044);
+  border-radius: 12px;
+  position: relative;
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+.sky-visualization::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      circle at 10% 20%,
+      rgba(255, 255, 255, 0.3) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 30% 40%,
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 50% 70%,
+      rgba(255, 255, 255, 0.3) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(255, 255, 255, 0.2) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 90% 60%,
+      rgba(255, 255, 255, 0.3) 1px,
+      transparent 1px
+    );
+  background-size: 200px 200px;
+}
+
+.planet-marker {
+  position: absolute;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  box-shadow: 0 0 15px rgba(108, 99, 255, 0.5);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 500;
+}
+
+.constellation {
+  position: absolute;
+  color: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  transform: translate(-50%, -50%);
+  border: 1px dashed rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  z-index: 2;
+}
+
+.sky-info {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.sky-detail {
+  text-align: center;
+}
+
+.sky-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.3rem;
+}
+
+.sky-value {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Animation keyframes */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive layout */
+@media (max-width: 1200px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solar-system-container {
+    height: 250px;
+    transform: scale(0.8);
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-links li a {
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .top-navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .logo {
+    margin-bottom: 1rem;
+  }
+
+  .nav-menu {
+    margin: 1rem 0;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .nav-menu::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .nav-menu::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 3px;
+  }
+
+  .nav-links {
+    justify-content: flex-start;
+    width: max-content;
+    min-width: 100%;
+    padding-bottom: 0.5rem;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .search-bar {
+    flex: 1;
+    margin-right: 1rem;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .welcome-section h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-links {
+    gap: 0.5rem;
+  }
+
+  .search-bar input {
+    width: 150px;
+  }
+
+  .missions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solar-system-container {
+    height: 200px;
+    transform: scale(0.6);
+  }
+
+  .astronomy-content {
+    flex-direction: column;
+  }
+
+  .astronomy-content img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+}
+
+.mobile-header {
+  display: none;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-menu-toggle {
+  background: transparent;
+  border: none;
+  color: var(--light);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.mobile-menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .mobile-header {
+    display: flex;
+  }
+
+  .top-navbar {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .logo {
+    margin-bottom: 0;
+  }
+
+  .nav-menu {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .nav-menu.active {
+    max-height: 400px;
+    margin: 1rem 0;
+  }
+  /* Make search bar bigger */
+  .header-actions .search-bar input {
+    width: 250px; /* Adjust width as per requirement */
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+
+  .header-actions .search-bar button {
+    background-color: #444;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  /* Fix User Section & Logout Button Clashing */
+  .user-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 20px;
+  }
+
+  .user-link {
+    display: flex;
+    align-items: center;
+  }
+
+  .user-info {
+    margin-left: 10px;
+  }
+
+  .logout-btn {
+    margin-left: 10px;
+  }
+
+  .user-name {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .user-status {
+    font-size: 12px;
+    color: gray;
+  }
+
+  /* Remove Notification icon */
+  .header-actions .notifications {
+    display: none;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    padding-bottom: 0;
+  }
+
+  .nav-links li a {
+    padding: 0.8rem;
+    width: 100%;
+  }
+
+  .header-actions {
+    display: none;
+  }
+
+  .header-actions.active {
+    display: flex;
+    margin-top: 1rem;
+  }
+
+  .search-bar {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Style the logout button */
+.logout-btn {
+  margin-left: 10px;
+  background-color: #ff4f4f; /* Red background for the logout button */
+  color: white; /* White text */
+  padding: 10px 20px; /* Padding around the button */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  display: flex;
+  align-items: center; /* Align icon and text */
+  margin-top: 10px; /* Space from the user info */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Change background on hover */
+.logout-btn:hover {
+  background-color: #e03e3e; /* Darker red on hover */
+}
+
+/* Add a little space between the icon and the text */
+.logout-btn i {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+/* Optional: Add a subtle box-shadow for better visibility */
+.logout-btn {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Make sure it looks good on mobile */
+@media (max-width: 600px) {
+  .logout-btn {
+    width: 100%; /* Full width on mobile */
+    text-align: center; /* Center the text */
+  }
+}

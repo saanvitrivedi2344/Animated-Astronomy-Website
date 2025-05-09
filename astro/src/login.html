@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmic Explorer | Login</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./login.css" />
+  </head>
+  <body>
+    <div class="stars" id="stars"></div>
+    <div class="planet" id="planet1"></div>
+    <div class="planet" id="planet2"></div>
+
+    <a href="dashboard.html" class="home-link"><i class="fas fa-home"></i></a>
+
+    <div class="container">
+      <header>
+        <h1>Login</h1>
+        <p class="tagline">Continue your cosmic journey</p>
+      </header>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username"
+            ><i class="fas fa-user field-icon"></i>Username or Email</label
+          >
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            placeholder="Enter your username or email"
+          />
+          <div class="error-message" id="username-error">
+            Please enter your username or email
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password"
+            ><i class="fas fa-lock field-icon"></i>Password</label
+          >
+          <div class="password-container">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              placeholder="Enter your password"
+            />
+            <span class="password-toggle" id="password-toggle"
+              ><i class="fas fa-eye"></i
+            ></span>
+          </div>
+          <div class="error-message" id="password-error">
+            Please enter your password
+          </div>
+        </div>
+
+        <div class="remember-me">
+          <input type="checkbox" id="remember" name="remember" />
+          <label for="remember">Remember me</label>
+        </div>
+
+        <div class="forgot-password">
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn">Log In</button>
+      </form>
+
+      <div class="login-methods">
+        <p>Or login with</p>
+        <div class="social-login">
+          <a href="#" class="social-btn google"
+            ><i class="fab fa-google"></i
+          ></a>
+          <a href="#" class="social-btn facebook"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a href="#" class="social-btn twitter"
+            ><i class="fab fa-twitter"></i
+          ></a>
+        </div>
+      </div>
+
+      <div class="register-link">
+        Don't have an account? <a href="register.html">Register here</a>
+      </div>
+    </div>
+
+    <script>
+      // Create stars background
+      function createStars() {
+        const starsContainer = document.getElementById("stars");
+        const starCount = 200;
+
+        for (let i = 0; i < starCount; i++) {
+          const star = document.createElement("div");
+          star.className = "star";
+
+          // Random properties
+          const size = Math.random() * 2 + 1;
+          const x = Math.random() * 100;
+          const y = Math.random() * 100;
+          const duration = Math.random() * 5 + 3 + "s";
+          const delay = Math.random() * 5 + "s";
+
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+          star.style.left = `${x}%`;
+          star.style.top = `${y}%`;
+          star.style.setProperty("--duration", duration);
+          star.style.animationDelay = delay;
+
+          starsContainer.appendChild(star);
+        }
+      }
+
+      // Create floating planets
+      function createPlanets() {
+        const planet1 = document.getElementById("planet1");
+        const planet2 = document.getElementById("planet2");
+
+        // Random properties for planet1
+        const size1 = Math.random() * 100 + 100;
+        const x1 = Math.random() * 20;
+        const y1 = Math.random() * 30;
+
+        planet1.style.width = `${size1}px`;
+        planet1.style.height = `${size1}px`;
+        planet1.style.left = `${x1}%`;
+        planet1.style.top = `${y1}%`;
+        planet1.style.background = `radial-gradient(circle at 30% 30%, ${getRandomColor()}, ${getRandomColor()})`;
+        planet1.style.boxShadow = `0 0 50px ${getRandomColor(0.3)}`;
+        planet1.style.animation = `float 20s infinite ease-in-out`;
+
+        // Random properties for planet2
+        const size2 = Math.random() * 80 + 60;
+        const x2 = Math.random() * 20 + 70;
+        const y2 = Math.random() * 20 + 60;
+
+        planet2.style.width = `${size2}px`;
+        planet2.style.height = `${size2}px`;
+        planet2.style.right = `${x2}%`;
+        planet2.style.bottom = `${y2}%`;
+        planet2.style.background = `radial-gradient(circle at 70% 30%, ${getRandomColor()}, ${getRandomColor()})`;
+        planet2.style.boxShadow = `0 0 30px ${getRandomColor(0.3)}`;
+        planet2.style.animation = `float 25s infinite ease-in-out reverse`;
+
+        // Add keyframes dynamically
+        const style = document.createElement("style");
+        style.innerHTML = `
+                @keyframes float {
+                    0%, 100% { transform: translateY(0) rotate(0deg); }
+                    50% { transform: translateY(-20px) rotate(5deg); }
+                }
+            `;
+        document.head.appendChild(style);
+      }
+
+      function getRandomColor(alpha = 1) {
+        const colors = [
+          `rgba(123, 31, 162, ${alpha})`, // Purple
+          `rgba(79, 195, 247, ${alpha})`, // Blue
+          `rgba(255, 235, 59, ${alpha})`, // Yellow
+          `rgba(233, 30, 99, ${alpha})`, // Pink
+          `rgba(76, 175, 80, ${alpha})`, // Green
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        createStars();
+        createPlanets();
+
+        const loginForm = document.getElementById("login-form");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("password");
+        const rememberCheckbox = document.getElementById("remember");
+        const usernameError = document.getElementById("username-error");
+        const passwordError = document.getElementById("password-error");
+        const passwordToggle = document.getElementById("password-toggle");
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+
+        // Load saved credentials if "Remember me" was checked
+        if (localStorage.getItem("rememberMe") === "true") {
+          const savedUsername = localStorage.getItem("username");
+          if (savedUsername) {
+            usernameInput.value = savedUsername;
+            rememberCheckbox.checked = true;
+            passwordInput.focus(); // Move focus to password field for better UX
+          }
+        }
+
+        // Toggle password visibility
+        passwordToggle.addEventListener("click", function () {
+          const isPassword = passwordInput.type === "password";
+          passwordInput.type = isPassword ? "text" : "password";
+          passwordToggle.innerHTML = isPassword
+            ? '<i class="fas fa-eye-slash"></i>'
+            : '<i class="fas fa-eye"></i>';
+        });
+
+        // Form submission handler
+        loginForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          // Reset errors and UI state
+          usernameError.style.display = "none";
+          passwordError.style.display = "none";
+          submitBtn.disabled = true;
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+
+          // Get and validate inputs
+          const usernameOrEmail = usernameInput.value.trim();
+          const password = passwordInput.value;
+          console.log(usernameOrEmail, password);
+          let isValid = true;
+
+          if (!usernameOrEmail) {
+            usernameError.textContent = "Please enter your username or email";
+            usernameError.style.display = "block";
+            isValid = false;
+          }
+
+          if (!password) {
+            passwordError.textContent = "Please enter your password";
+            passwordError.style.display = "block";
+            isValid = false;
+          }
+
+          if (!isValid) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Log In";
+            return;
+          }
+
+          try {
+            // Enhanced request with error handling
+            const response = await fetch(
+              "http://localhost:5000/api/auth/login",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  usernameOrEmail: usernameOrEmail,
+                  password: password,
+                }),
+              }
+            );
+
+            // Handle non-2xx responses
+            if (!response.ok) {
+              const errorData = await response.json().catch(() => ({}));
+              throw new Error(
+                errorData.msg || `Login failed (Status: ${response.status})`
+              );
+            }
+
+            const data = await response.json();
+
+            // Validate response structure
+            if (!data.token || !data.user) {
+              throw new Error("Invalid server response");
+            }
+
+            // Store credentials securely
+            if (rememberCheckbox.checked) {
+              localStorage.setItem("rememberMe", "true");
+              localStorage.setItem("username", usernameOrEmail);
+            } else {
+              localStorage.removeItem("rememberMe");
+              localStorage.removeItem("username");
+            }
+
+            // Store auth data
+            localStorage.setItem("authToken", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+
+            // Redirect to dashboard
+            window.location.href = "dashboard.html";
+          } catch (error) {
+            console.error("Login error:", error);
+
+            // User-friendly error messages
+            let errorMessage = "Login failed. Please try again.";
+            if (error.message.includes("credentials")) {
+              errorMessage = "Invalid username/email or password";
+            } else if (error.message.includes("NetworkError")) {
+              errorMessage = "Network error. Please check your connection.";
+            }
+
+            usernameError.textContent = errorMessage;
+            usernameError.style.display = "block";
+            passwordError.style.display = "block";
+
+            // Security: Clear password field on error
+            passwordInput.value = "";
+            passwordInput.focus();
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "Log In";
+          }
+        });
+
+        // Clear errors when user types
+        const clearErrorOnInput = (inputElement, errorElement) => {
+          inputElement.addEventListener("input", () => {
+            if (errorElement.style.display === "block") {
+              errorElement.style.display = "none";
+            }
+          });
+        };
+
+        clearErrorOnInput(usernameInput, usernameError);
+        clearErrorOnInput(passwordInput, passwordError);
+      });
+    </script>
+  </body>
+</html>
